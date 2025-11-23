@@ -1,0 +1,36 @@
+/* Base look copied from layout for consistency */
+body{ background: radial-gradient(1000px 400px at 10% 10%, rgba(72,160,255,0.03), transparent 10%), linear-gradient(180deg, rgba(6,32,58,1) 0%, rgba(4,19,43,1) 100%); background-color:#04132b; color:#cfefff; min-height:100vh; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; }
+.bevel{ border:1px solid rgba(255,255,255,0.04); box-shadow:0 6px 18px rgba(2,8,23,0.72), inset 0 2px 0 rgba(255,255,255,0.02); background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12)); border-radius:10px; backdrop-filter: blur(6px);} 
+.pixel-sep{ height:6px; display:block; }
+.pixel-dot{ width:6px; height:6px; display:inline-block; }
+
+/* Glow utilities for buttons */
+.neon-btn{ transition: all .18s ease; box-shadow: 0 6px 18px rgba(2,8,23,0.6); }
+.neon-btn:hover{ transform: translateY(-3px); }
+.glow-yellow{ box-shadow: 0 6px 20px rgba(255,224,102,0.08), 0 0 18px rgba(255,224,102,0.06); }
+.glow-turq{ box-shadow: 0 6px 20px rgba(77,225,193,0.06), 0 0 18px rgba(77,225,193,0.06); }
+.glow-blue{ box-shadow: 0 6px 20px rgba(88,166,255,0.06), 0 0 18px rgba(88,166,255,0.06); }
+.glow-pink{ box-shadow: 0 6px 20px rgba(210,140,255,0.06), 0 0 18px rgba(210,140,255,0.06); }
+.pixel-btn{ font-family: 'Press Start 2P', monospace; font-size:11px; }
+
+/* Skeleton animation */
+@keyframes shimmer { 0% { background-position: -200% 0 } 100% { background-position: 200% 0 } }
+.skeleton{ background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%); background-size: 200% 100%; animation: shimmer 1.4s linear infinite; border-radius:6px; }
+
+/* Pixel spinner */
+@keyframes pixel-spin { 0%{ transform: rotate(0deg) } 100% { transform: rotate(360deg) } }
+.pixel-spinner{ width:36px; height:36px; display:inline-grid; grid-template-columns: repeat(3, 1fr); gap:4px; animation: pixel-spin 1.2s linear infinite; }
+.pixel-spinner span{ display:block; background: linear-gradient(180deg,#58A6FF,#4DE1C1); box-shadow:0 0 8px rgba(77,225,193,0.08); }
+
+/* Tabs */
+.pixel-tabs button{ font-family:'Press Start 2P'; font-size:11px; }
+
+/* Modal base */
+.modal-backdrop{ background: linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.8)); backdrop-filter: blur(3px); }
+
+/* Decorative pixel line */
+.decor-line{ height:8px; display:flex; gap:6px; align-items:center; }
+.decor-line .block{ width:8px; height:8px; border-radius:2px; box-shadow:0 0 8px currentColor; }
+
+/* small helpers */
+.kbd{ font-family:'Press Start 2P'; font-size:10px; padding:.3rem .5rem; background:rgba(255,255,255,0.03); border-radius:6px; }

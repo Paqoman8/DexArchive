@@ -6,7 +6,7 @@ const PokeCard = ({ p }) => {
 
   const fetchData = async () => {
     const res = await fetchResourceByUrl(p.url);
-    console.log("datas", res);
+    // console.log("datas", res);
 
     setdata(res);
   }

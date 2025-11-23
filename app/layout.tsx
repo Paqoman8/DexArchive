@@ -26,14 +26,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // Ajout de suppressHydrationWarning pour ignorer les mismatches d'attributs/DOM lors de l'hydration
+    <html lang="en" suppressHydrationWarning={true}>
       <body
         // className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        suppressHydrationWarning={true}
       >
         <Sidebar/>
         <Header/>
         {children}
-        <Footer/>
+        {/* <Footer/> */}
       </body>
     </html>
   );

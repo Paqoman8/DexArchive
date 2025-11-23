@@ -95,6 +95,15 @@ const Sidebar = () => {
                 </nav>
 
                 {/* <!-- Decorative pixels bottom-right --> */}
+                <div className="absolute right-4 bottom-16 z-10 flex items-center gap-3 text-[11px] text-slate-200/80 font-pixel select-none">
+                    <span>© DexArchive</span>
+                    <span className="opacity-60">—</span>
+                    <span className="flex items-center gap-1">
+                        <span className="opacity-80">Made with</span>
+                        <span className="text-neon-pink">❤️</span>
+                        <span className="opacity-60">by Paqoman</span>
+                    </span>
+                </div>
                 <div className="absolute right-4 bottom-4 grid grid-cols-3 gap-1 z-10 opacity-95">
                     <span className="w-2 h-2 bg-neon-blue/90 rounded-sm shadow-[0_0_8px_#58A6FF]" />
                     <span className="w-2 h-2 bg-neon-turq/90 rounded-sm shadow-[0_0_8px_#4DE1C1]" />

@@ -1,36 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { fetchResourceByUrl } from '@/services/pokeapi/pokeapiService';
 
-// type Stats = {
-//   hp: number;
-//   attack: number;
-//   defense: number;
-//   spAttack: number;
-//   spDefense: number;
-//   speed: number;
-// };
-
-// type Pokemon = {
-//   id?: number;
-//   name?: string;
-//   species?: string;
-//   types?: any[] | string[];
-//   rarity?: number;
-//   height?: string | number;
-//   weight?: string | number;
-//   abilities?: any;
-//   description?: string;
-//   stats?: any;
-//   pixelArtUrl?: string | null;
-//   url?: string;
-// };
-
-// type Props = {
-//   isOpen: boolean;
-//   onClose: () => void;
-//   pokemon: Pokemon | null;
-// };
-
 const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
   const modalRef = useRef<HTMLDivElement | null>(null);
   const overlayRef = useRef<HTMLDivElement | null>(null);
@@ -152,13 +122,23 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
   const s = normalizeStats(source?.stats);
   const renderRarity = (r = (source?.rarity ?? 0)) => '★'.repeat(r) + '☆'.repeat(Math.max(0, 5 - r));
 
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === overlayRef.current) onClose();
+  const handleOverlayClick = (e: React.MouseEvent | React.TouchEvent) => {
+    // determine the actual event target (works for mouse & touch)
+    const target = (e.target as Node | null);
+    // if modalRef is not set, be conservative and close
+    if (!modalRef.current) {
+      onClose();
+      return;
+    }
+    // if click/touch occurred outside the modal element, close the modal
+    if (target && !modalRef.current.contains(target)) {
+      onClose();
+    }
   };
 
   if (loading) {
     return (
-      <div ref={overlayRef} onMouseDown={handleOverlayClick} className="fixed inset-0 z-50 flex items-center justify-center">
+      <div ref={overlayRef} onMouseDown={handleOverlayClick} onTouchStart={handleOverlayClick} className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
         <div className="relative z-10 p-6 bg-night-900/80 rounded-md">Chargement...</div>
       </div>
@@ -170,6 +150,7 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
     // key={pokemon.name}
       ref={overlayRef}
       onMouseDown={handleOverlayClick}
+      onTouchStart={handleOverlayClick}
       className="fixed inset-0 z-50 flex items-center justify-center "
       aria-hidden={!isOpen}
     >
@@ -201,7 +182,7 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
             {/* Left: Pixel art large */}
             <div className="md:col-span-1 flex items-center justify-center">
               <div className="pixel-frame w-full max-w-xs pixel-border bg-night-800/60 p-4">
-                {/* <div
+{/* <div
                   className="w-full h-80 bg-gradient-to-br from-slate-800/40 via-slate-900/30 to-black rounded-md flex items-center justify-center pixel-grid
                              shadow-[0_18px_50px_rgba(22,46,92,0.6),inset_0_1px_0_rgba(255,255,255,0.02)]"
                 >
@@ -218,17 +199,6 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
                   ) : (
                     <div className="w-48 h-48 bg-black/40 rounded-sm flex items-center justify-center text-neon-blue text-[10px] font-pixel">PIXEL ART</div>
                   )}
-
-                {/* <div className="mt-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-neon-yellow font-pixel text-[12px]">Fiche #{String(source?.id ?? pokemon?.id ?? 0).padStart(3, '0')}</span>
-                    <span className="text-slate-400 text-xs">— {getSimpleName(source?.species ?? pokemon?.species) ?? 'Espèce inconnue'}</span>
-                  </div>
-                  <div className="flex gap-2">
-                    <button className="px-3 py-1 text-xs font-pixel text-neon-blue border border-neon-blue/10 rounded">Exporter</button>
-                    <button className="px-3 py-1 text-xs font-pixel text-neon-pink border border-neon-pink/10 rounded">Annoter</button>
-                  </div>
-                </div> */}
               </div>
             </div>
 
@@ -242,15 +212,9 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
 
                     <div className="mt-3 badge-wrap">
                       {getTypes(source?.types ?? pokemon?.types).map((t: string, i: number) => (
-                        // <span key={i} className="type-badge bg-neon-yellow/10 text-neon-yellow mr-2">{t?.toString?.()?.toUpperCase?.() ?? t}</span>
                         <span key={i} className={`type-badge type-${t}`}>{t?.toString?.()?.toUpperCase?.() ?? t}</span>
                       ))}
                     </div>
-                  </div>
-
-                  <div className="text-right">
-                    <div className="text-xs text-slate-400">Rareté</div>
-                    <div className="font-pixel text-neon-blue text-[18px]">{renderRarity()}</div>
                   </div>
                 </div>
 
@@ -272,8 +236,6 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
                     </div>
                   </div>
                 </div>
-
-                <div className="mt-4 text-sm text-slate-300/70">Description: <span className="text-slate-200">{source?.description ?? pokemon?.description ?? 'Aucune description fournie.'}</span></div>
               </div>
 
               {/* Stats card */}
@@ -363,7 +325,7 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
               </div>
 
               {/* Archive notes */}
-              <div className="bevel p-4 pixel-border">
+              {/* <div className="bevel p-4 pixel-border">
                 <h3 className="font-pixel text-neon-yellow text-[12px]">Notes d'archive</h3>
                 <p className="mt-2 text-sm text-slate-300/70">Observations et annotations scientifiques — zone libre pour commentaires internes.</p>
 
@@ -373,7 +335,7 @@ const PokemonDetails: React.FC<Props> = ({ isOpen, onClose, pokemon }) => {
                   <button className="px-3 py-1 text-xs font-pixel text-neon-blue border border-neon-blue/10 rounded">Sauvegarder</button>
                   <button onClick={onClose} className="px-3 py-1 text-xs font-pixel text-slate-400 border border-slate-700/10 rounded">Annuler</button>
                 </div>
-              </div>
+              </div> */}
 
             </div>
 
