@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <>
         {/* <!-- Header --> */}
-  <header className="fixed left-0 right-0 top-4 mx-4 sm:mx-80 md:mx-[calc(18rem+36px)] px-4 py-2 header-glow flex items-center justify-between gap-4">
+  <header className="fixed z-10 left-0 right-0 top-4 mx-4 sm:mx-80 md:mx-[calc(18rem+36px)] px-4 py-2 header-glow flex items-center justify-between gap-4">
     <div className="flex items-center gap-3">
       <div className="w-8 h-8 rounded-md bg-neon-blue/10 flex items-center justify-center text-neon-blue text-xs font-pixel">DA</div>
       <div>
