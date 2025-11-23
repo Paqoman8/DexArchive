@@ -57,11 +57,12 @@ export async function getResource(path, params = {}) {
 	return pokeapi.get(path, { params });
 }
 
-export async function getPokemons(/* optional params */) {
+export async function getPokemons(limit = 20) {
     // Remarque : pokeapi.interceptors.response retourne response.data
     // Avant : const pokemons = pokeapi.get(`/pokemon`); return pokemons.results
     // Correction : attendre la réponse et retourner soit la structure complète soit .results
-    const data = await pokeapi.get(`/pokemon`);
+    const data = await pokeapi.get(`/pokemon?limit=${limit}`);
+	
     // Si vous voulez uniquement la liste : return data.results;
     return data;
 }

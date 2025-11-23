@@ -1,5 +1,6 @@
 'use client';
 import PokeCard from '@/components/pokedex/PokeCard';
+import PokemonDetails from '@/components/pokedex/PokemonDetails';
 import { getPokemons } from '@/services/pokeapi/pokeapiService';
 import React, { useEffect, useMemo, useState } from 'react';
 
@@ -35,11 +36,13 @@ const Page = () => {
   const [query, setQuery] = useState('');
   const [activeType, setActiveType] = useState('all');
   const [gen, setGen] = useState('all');
-  const [POKEMON,setPOKEMON] = useState([]);
+  const [POKEMON,setPOKEMON] = useState<any[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPokemon, setSelectedPokemon] = useState<any | null>(null);
 
   const fetchAllPokemons = async () => {
     try {
-      const res = await getPokemons()
+      const res = await getPokemons(40)
       console.log(res);
       setPOKEMON(res.results);
     } catch (error) {
@@ -51,6 +54,16 @@ const Page = () => {
   useEffect(() => {
     fetchAllPokemons()
   },[])
+
+  const openModal = (p: any) => {
+    setSelectedPokemon(p);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedPokemon(null);
+  };
 
   // const filtered = useMemo(() => {
   //   const q = (query || '').toLowerCase().trim();
@@ -130,13 +143,15 @@ const Page = () => {
             {/* {filtered.map(p => (
               <PokeCard key={p.name} p={p} />
             ))} */}
-            {POKEMON.map(p => (
-              <PokeCard key={p.name} p={p} />
+            {POKEMON.map((p,index) => (
+              <button onClick={() => openModal(p)} key={index} className="block">
+                <PokeCard p={p} />
+              </button>
             ))}
 
           </div>
         </section>
-
+        <PokemonDetails isOpen={isModalOpen} onClose={closeModal} pokemon={selectedPokemon} />
       </main>
     </>
   );
