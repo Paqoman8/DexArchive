@@ -1,0 +1,86 @@
+/* *{
+    border: 1px solid black;
+} */
+
+body {
+    background: radial-gradient(1000px 400px at 10% 10%, rgba(72, 160, 255, 0.03), transparent 10%),
+        linear-gradient(180deg, rgba(6, 32, 58, 1) 0%, rgba(4, 19, 43, 1) 100%);
+    background-color: #04132b;
+    color: #cfefff;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.bevel {
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    box-shadow: 0 6px 18px rgba(2, 8, 23, 0.72), inset 0 2px 0 rgba(255, 255, 255, 0.02);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.12));
+    border-radius: 10px;
+    backdrop-filter: blur(6px);
+}
+
+.pixel-dot {
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor;
+    display: inline-block;
+}
+
+.pixel-link {
+    position: relative;
+    padding: 0.6rem 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.pixel-link .dot-left,
+.pixel-link .dot-right {
+    width: 6px;
+    height: 6px;
+    background: transparent;
+    transition: background .18s, transform .18s;
+}
+
+.pixel-link:hover .dot-left {
+    background: var(--c);
+    transform: translateX(-3px);
+    box-shadow: 0 0 8px var(--c);
+}
+
+.pixel-link:hover .dot-right {
+    background: var(--c);
+    transform: translateX(3px);
+    box-shadow: 0 0 8px var(--c);
+}
+
+.pixel-link .label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 11px;
+    letter-spacing: .5px;
+}
+
+.header-glow {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(6px);
+    box-shadow: 0 6px 24px rgba(88, 166, 255, 0.06);
+}
+
+.pixel-grid {
+    background-image:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 28px 28px;
+    opacity: .04;
+}
+
+@media (max-width: 768px) {
+    .md\:ml-sidebar {
+        margin-left: 0 !important;
+    }
+}

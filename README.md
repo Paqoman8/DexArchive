@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DexArchive
+
+DexArchive is a modern, web-based Pokedex application built with Next.js and Tailwind CSS. It allows users to browse, search, and view detailed information about Pokemon using the [PokeAPI](https://pokeapi.co/).
+
+## Features
+
+-   **Pokedex Browser**: Browse a comprehensive list of Pokemon.
+-   **Detailed Views**: View detailed statistics, abilities, and types for each Pokemon.
+-   **Responsive Design**: Optimized for both desktop and mobile devices.
+-   **Modern UI**: Built with a clean and modern interface using Tailwind CSS.
+-   **Efficient Data Fetching**: Utilizes Axios for optimized API interactions.
+
+## Tech Stack
+
+-   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+-   **Language**: [TypeScript](https://www.typescriptlang.org/)
+-   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+-   **HTTP Client**: [Axios](https://axios-http.com/)
+-   **API**: [PokeAPI](https://pokeapi.co/)
 
 ## Getting Started
 
-First, run the development server:
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ensure you have the following installed:
+-   [Node.js](https://nodejs.org/) (v18 or higher recommended)
+-   npm, yarn, pnpm, or bun
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1.  **Clone the repository:**
 
-## Learn More
+    ```bash
+    git clone https://github.com/Paqoman8/DexArchive.git
+    cd dexarchive
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+2.  **Install dependencies:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    # or
+    bun install
+    ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3.  **Run the development server:**
 
-## Deploy on Vercel
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4.  **Open the application:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Project Structure
+
+The project follows a standard Next.js App Router structure:
+
+-   `app/`: Contains the application routes and pages.
+    -   `(public)/`: Publicly accessible routes.
+    -   `layout.tsx`: Main application layout.
+-   `components/`: Reusable UI components.
+    -   `layout/`: Layout components like Header, Sidebar, Footer.
+    -   `pokedex/`: Components specific to the Pokedex feature.
+-   `services/`: Service layer for API integration.
+    -   `pokeapi/`: PokeAPI integration logic.
+
+## Contributing
+
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
